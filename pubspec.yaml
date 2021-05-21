@@ -1,6 +1,6 @@
 ---
 name: personal_expenses
-description: A new Flutter application.
+description: A greatest personal expenses.
 publish_to: none
 version: 1.0.0+1
 environment:
@@ -15,3 +15,14 @@ dev_dependencies:
     sdk: flutter
 flutter:
   uses-material-design: true
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
+    - family: QuickSand
+      fonts:
+        - asset: assets/fonts/QuickSand-Regular.ttf
+        - asset: assets/fonts/QuickSand-Bold.ttf
+          weight: 700
