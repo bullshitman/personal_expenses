@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/models/transaction.dart';
 import 'package:intl/intl.dart';
@@ -30,7 +28,7 @@ class Chart extends StatelessWidget {
     });
   }
 
-  double get maxSpending {
+  double get totalSpending {
     return groupedTransactionValues.fold(0.0, (sum, element) {
       return sum + element['amount'];
     });
@@ -41,15 +39,22 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6.0,
       margin: EdgeInsets.all(20.0),
-      child: Row(
-        children: groupedTransactionValues.map((data) {
-          return ChartBar(
-              data['day'],
-              data['amount'],
-              maxSpending == 0.0
-                  ? 0.0
-                  : (data['amount'] as double) / maxSpending);
-        }).toList(),
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactionValues.map((data) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                  data['day'],
+                  data['amount'],
+                  totalSpending == 0.0
+                      ? 0.0
+                      : (data['amount'] as double) / totalSpending),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
