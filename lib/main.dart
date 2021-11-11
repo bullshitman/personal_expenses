@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
     Transaction(
         id: 't1', title: 'doshirak', amount: 1.55, date: DateTime.now()),
     Transaction(
-        id: 't2', title: 'chan ramen', amount: 2.07, date: DateTime.now()),
+        id: 't2', title: 'chan-ramen', amount: 2.07, date: DateTime.now()),
   ];
 
   @override
@@ -46,13 +46,19 @@ class HomePage extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(tx.amount.toString()),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 2),
+                      ),
+                      padding: EdgeInsets.all(10),
                     ),
                     Column(
                       children: [
                         Text(tx.title),
                         Text(tx.date.toString()),
                       ],
-                    )
+                    ),
                   ],
                 ),
               );
