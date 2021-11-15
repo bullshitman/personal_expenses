@@ -15,16 +15,16 @@ dev_dependencies:
     sdk: flutter
 flutter:
   assets:
-    - assets/images/
+  - assets/images/
   uses-material-design: true
-  fonts:
-    - family: OpenSans
-      fonts:
-        - asset: assets/fonts/OpenSans-Regular.ttf
-        - asset: assets/fonts/OpenSans-Bold.ttf
-          weight: 700
-    - family: QuickSand
-      fonts:
-        - asset: assets/fonts/QuickSand-Regular.ttf
-        - asset: assets/fonts/QuickSand-Bold.ttf
-          weight: 700
+#  fonts:
+#  - family: OpenSans
+#    fonts:
+#    - asset: assets/fonts/OpenSans-Regular.ttf
+#    - asset: assets/fonts/OpenSans-Bold.ttf
+#      weight: 700
+#  - family: QuickSand
+#    fonts:
+#    - asset: assets/fonts/QuickSand-Regular.ttf
+#    - asset: assets/fonts/QuickSand-Bold.ttf
+#      weight: 700

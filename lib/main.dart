@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses/transaction.dart';
+import 'package:personal_expenses/models/transaction.dart';
+import 'package:intl/intl.dart';
+import 'package:personal_expenses/widgets/new_transaction.dart';
+import 'package:personal_expenses/widgets/transaction_list.dart';
+import 'package:personal_expenses/widgets/user_transaction.dart';
 
 void main() => runApp(PersExp());
 
@@ -14,12 +18,10 @@ class PersExp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-        id: 't1', title: 'doshirak', amount: 1.55, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'chan-ramen', amount: 2.07, date: DateTime.now()),
-  ];
+  // final List<Transaction> transactions = [];
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class HomePage extends StatelessWidget {
         title: Text('Flutter app'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
@@ -39,31 +41,7 @@ class HomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Column(
-            children: transactions.map((tx) {
-              return Card(
-                child: Row(
-                  children: [
-                    Container(
-                      child: Text(tx.amount.toString()),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 2),
-                      ),
-                      padding: EdgeInsets.all(10),
-                    ),
-                    Column(
-                      children: [
-                        Text(tx.title),
-                        Text(tx.date.toString()),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
-          ),
+          UserTransaction(),
         ],
       ),
     );
