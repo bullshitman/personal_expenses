@@ -10,7 +10,19 @@ class PersExp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter app',
+      title: 'Personal expenses',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+            .copyWith(secondary: Colors.amber),
+        fontFamily: 'QuickSand',
+        appBarTheme: AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -57,7 +69,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter app'),
+        title: Text('Personal expenses'),
         actions: [
           IconButton(
             onPressed: () => _startAddNewTx(context),
