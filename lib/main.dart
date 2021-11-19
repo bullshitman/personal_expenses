@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/models/transaction.dart';
-import 'package:intl/intl.dart';
 import 'package:personal_expenses/widgets/new_transaction.dart';
 import 'package:personal_expenses/widgets/transaction_list.dart';
 
@@ -15,6 +14,13 @@ class PersExp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
             .copyWith(secondary: Colors.amber),
         fontFamily: 'QuickSand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              bodyText1: TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
         appBarTheme: AppBarTheme(
           titleTextStyle: TextStyle(
             fontFamily: 'OpenSans',
@@ -44,10 +50,11 @@ class _HomePageState extends State<HomePage> {
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
-        id: DateTime.now().toString(),
-        title: txTitle,
-        amount: txAmount,
-        date: DateTime.now());
+      id: DateTime.now().toString(),
+      title: txTitle,
+      amount: txAmount,
+      date: DateTime.now(),
+    );
     setState(() {
       _userTransactions.add(newTx);
     });
