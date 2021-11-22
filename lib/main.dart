@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses/models/transaction.dart';
+import 'package:personal_expenses/widgets/chart.dart';
 import 'package:personal_expenses/widgets/new_transaction.dart';
 import 'package:personal_expenses/widgets/transaction_list.dart';
 
@@ -91,11 +92,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               width: double.infinity,
-              child: Card(
-                color: Colors.yellow,
-                child: Text('!CHART!'),
-                elevation: 5,
-              ),
+              child: Chart(),
             ),
             TransactionList(_userTransactions),
           ],
