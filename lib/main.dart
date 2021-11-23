@@ -49,6 +49,16 @@ class _HomePageState extends State<HomePage> {
     //     id: 't2', title: 'chan-ramen', amount: 2.07, date: DateTime.now()),
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((element) {
+      return element.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
@@ -92,7 +102,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               width: double.infinity,
-              child: Chart(),
+              child: Chart(_recentTransactions),
             ),
             TransactionList(_userTransactions),
           ],
