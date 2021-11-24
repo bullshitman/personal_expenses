@@ -10,7 +10,7 @@ class Chart extends StatelessWidget {
   List<Map<String, Object>> get groupedTransactionValues {
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(Duration(days: index));
-      double totalSumm;
+      double totalSumm = 0.0;
       for (int i = 0; i < _recentTransactions.length; i++) {
         if (_recentTransactions[i].date.day == weekDay.day &&
             _recentTransactions[i].date.month == weekDay.month &&
@@ -29,7 +29,7 @@ class Chart extends StatelessWidget {
       margin: EdgeInsets.all(20),
       child: Row(
         children: groupedTransactionValues.map((element) {
-          return Text('${element['data']} + ${element['amount'].toString()}');
+          return Text('${element['day']} ${element['amount']}');
         }).toList(),
       ),
     );
