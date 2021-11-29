@@ -11,25 +11,27 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _transactions.isEmpty
-        ? Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'No transactions yet',
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                height: 200,
-                child: Image.asset(
-                  'assets/images/waiting.png',
-                  fit: BoxFit.cover,
+        ? LayoutBuilder(builder: (context, constraints) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'No transactions yet',
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
-              ),
-            ],
-          )
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  height: constraints.maxHeight * 0.6,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ],
+            );
+          })
         : ListView.builder(
             itemBuilder: (ctx, index) {
               return Card(
@@ -51,13 +53,26 @@ class TransactionList extends StatelessWidget {
                   ),
                   subtitle: Text(
                       DateFormat.yMMMd().format(_transactions[index].date)),
-                  trailing: IconButton(
-                    onPressed: () => _deleteTx(_transactions[index].id),
-                    icon: Icon(
-                      Icons.delete,
-                      color: Theme.of(context).errorColor,
-                    ),
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 400
+                      ? TextButton.icon(
+                          onPressed: () => _deleteTx(_transactions[index].id),
+                          icon: Icon(
+                            Icons.delete,
+                            color: Theme.of(context).errorColor,
+                          ),
+                          label: Text(
+                            'Delete',
+                            style:
+                                TextStyle(color: Theme.of(context).errorColor),
+                          ),
+                        )
+                      : IconButton(
+                          onPressed: () => _deleteTx(_transactions[index].id),
+                          icon: Icon(
+                            Icons.delete,
+                            color: Theme.of(context).errorColor,
+                          ),
+                        ),
                 ),
               );
             },
