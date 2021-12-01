@@ -135,49 +135,58 @@ class _HomePageState extends State<HomePage> {
       child: TransactionList(_userTransactions, _deleteTransaction),
     );
 
+    List<Widget> _buildLandScapeMode() {
+      return [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Show chart',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            Switch.adaptive(
+              activeColor: Theme.of(context).colorScheme.secondary,
+              value: _showChart,
+              onChanged: (value) {
+                setState(() {
+                  _showChart = value;
+                });
+              },
+            ),
+          ],
+        ),
+        _showChart
+            ? Container(
+                height: (mediaQuery.size.height -
+                        appBar.preferredSize.height -
+                        mediaQuery.padding.top) *
+                    0.7,
+                child: Chart(_recentTransactions),
+              )
+            : txListWidget
+      ];
+    }
+
+    List<Widget> _buildPortraitMode() {
+      return [
+        Container(
+          height: (mediaQuery.size.height -
+                  appBar.preferredSize.height -
+                  mediaQuery.padding.top) *
+              0.3,
+          child: Chart(_recentTransactions),
+        ),
+        txListWidget
+      ];
+    }
+
     final pageBody = SafeArea(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (isLandScape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Show chart',
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                  Switch.adaptive(
-                    activeColor: Theme.of(context).colorScheme.secondary,
-                    value: _showChart,
-                    onChanged: (value) {
-                      setState(() {
-                        _showChart = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            if (!isLandScape)
-              Container(
-                height: (mediaQuery.size.height -
-                        appBar.preferredSize.height -
-                        mediaQuery.padding.top) *
-                    0.3,
-                child: Chart(_recentTransactions),
-              ),
-            if (!isLandScape) txListWidget,
-            if (isLandScape)
-              _showChart
-                  ? Container(
-                      height: (mediaQuery.size.height -
-                              appBar.preferredSize.height -
-                              mediaQuery.padding.top) *
-                          0.7,
-                      child: Chart(_recentTransactions),
-                    )
-                  : txListWidget,
+            if (isLandScape) ..._buildLandScapeMode(),
+            if (!isLandScape) ..._buildPortraitMode(),
           ],
         ),
       ),

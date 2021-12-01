@@ -8,10 +8,15 @@ import 'package:personal_expenses/widgets/adaptive_button.dart';
 class NewTransaction extends StatefulWidget {
   final Function _addNewTx;
 
-  NewTransaction(this._addNewTx);
+  NewTransaction(this._addNewTx) {
+    print('constructor newTransaction Widget');
+  }
 
   @override
-  State<NewTransaction> createState() => _NewTransactionState();
+  State<NewTransaction> createState() {
+    print('createState newTransaction Widget');
+    return _NewTransactionState();
+  }
 }
 
 class _NewTransactionState extends State<NewTransaction> {
@@ -19,12 +24,24 @@ class _NewTransactionState extends State<NewTransaction> {
   final _amountController = TextEditingController();
   DateTime _selectedDate;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   void _submitData() {
-    final enteredTitle = _titleController.text;
-    final enteredAmount = double.parse(_amountController.text);
-    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
+    if (_titleController.text.isEmpty ||
+        _amountController.text.isEmpty ||
+        _selectedDate == null) {
       return;
     }
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
+    }
+
     widget._addNewTx(
       _titleController.text,
       double.parse(_amountController.text),
@@ -51,6 +68,7 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
+    print('build new transaction');
     return Card(
       elevation: 5,
       child: SingleChildScrollView(
